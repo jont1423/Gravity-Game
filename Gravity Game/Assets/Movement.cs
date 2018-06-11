@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class Movement : MonoBehaviour {
 
 	public int score = 0;
+	public int highscore = 0;
 	public int speed = 10;
 	//public GameObject displayScore;
 	public GameObject jewel;
@@ -65,6 +66,9 @@ public class Movement : MonoBehaviour {
 		if (trig.gameObject.tag == "JewelTag"){
 			//Debug.Log ("!!");
 			score += 10;
+			if (score > highscore) {
+				highscore = score;
+			}
 			//displayScore.gameObject.GetComponent<Text> ().text = "" + score;
 			addJewel ();
 			Destroy (trig.gameObject);
