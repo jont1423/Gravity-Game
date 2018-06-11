@@ -80,6 +80,7 @@ public class Movement : MonoBehaviour {
 		if (trig.gameObject.tag == "ParrotTag") {
 			Debug.Log ("You're dead.");
 			score = 0;
+            SetCountText();
 			//Get game to restart properly
 		}
 	}
