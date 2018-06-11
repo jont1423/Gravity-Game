@@ -6,6 +6,9 @@ public class Movement : MonoBehaviour {
 
 	public int score = 0;
 	public int highscore = 0;
+    public Text scoreCount;
+    public Text highScoreCount;
+	public int highScore = 0;
 	public int speed = 10;
 	//public GameObject displayScore;
 	public GameObject jewel;
@@ -14,6 +17,8 @@ public class Movement : MonoBehaviour {
 
 	void Start(){
 		addJewel ();
+
+        highScoreCount.text = "High Score: " + PlayerPrefs.GetInt("Highscore", 0).ToString();
 	}
 	
 	// Update is called once per frame
@@ -66,9 +71,8 @@ public class Movement : MonoBehaviour {
 		if (trig.gameObject.tag == "JewelTag"){
 			//Debug.Log ("!!");
 			score += 10;
-			if (score > highscore) {
-				highscore = score;
-			}
+            SetCountText();
+
 			//displayScore.gameObject.GetComponent<Text> ().text = "" + score;
 			addJewel ();
 			Destroy (trig.gameObject);
@@ -79,4 +83,12 @@ public class Movement : MonoBehaviour {
 			//Get game to restart properly
 		}
 	}
+    void SetCountText(){
+        scoreCount.text = "Score: " + score.ToString();
+
+        if(score > PlayerPrefs.GetInt("Highscore", 0)){
+            PlayerPrefs.SetInt("Highscore", score);
+            highScoreCount.text = "High Score: " + score.ToString();
+        }
+    }
 }
