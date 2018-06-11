@@ -23,6 +23,7 @@ public class Movement : MonoBehaviour {
 	void movePlayer(){
 		moveX = Input.GetAxis ("Horizontal");
 		if (Input.GetButtonDown ("Jump")) {
+			//Debug.Log ("!");
 			if (gameObject.GetComponent<Rigidbody2D> ().position.y < -4 || gameObject.GetComponent<Rigidbody2D> ().position.y > 4) {
 				flipY ();
 			} else {
@@ -60,11 +61,18 @@ public class Movement : MonoBehaviour {
 	}
 
 	void OnTriggerEnter2D(Collider2D trig){
+		//Debug.Log ("!");
 		if (trig.gameObject.tag == "JewelTag"){
+			//Debug.Log ("!!");
 			score += 10;
 			//displayScore.gameObject.GetComponent<Text> ().text = "" + score;
 			addJewel ();
 			Destroy (trig.gameObject);
+		}
+		if (trig.gameObject.tag == "ParrotTag") {
+			Debug.Log ("You're dead.");
+			score = 0;
+			//Get game to restart properly
 		}
 	}
 }
